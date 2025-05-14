@@ -14,10 +14,14 @@ minitop is a simple system monitoring tool written in Bash. It displays:
 
 
 ## Build
+```bash
 ./build-deb.sh
+```
 
 ## Install
+``` bash
 sudo apt install ./minitop_1.0.deb
+```
 
 ## Customizations
 Customize editing minitop-core.sh
