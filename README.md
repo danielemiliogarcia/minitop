@@ -10,7 +10,7 @@ minitop is a simple system monitoring tool written in Bash. It displays:
 - Network traffic (RX/TX)
 - Disk usage per mount point
 
-![image](https://github.com/user-attachments/assets/7ad97b0c-a766-415a-9411-ca2ca885fabf)
+![image](https://github.com/user-attachments/assets/2a9b53bd-9a80-4d64-a68b-325b2baab426)
 
 
 ## One liner install from release files
