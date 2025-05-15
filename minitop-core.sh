@@ -2,10 +2,38 @@
 
 print_cpu_usage() {
   nproc=$(nproc)
-  echo "Top CPU-consuming processes:"
+  printf "%-20s %16s\n" "Command" "% of total CPU"
+  echo ""
   ps -eo comm,pcpu --no-headers | \
-    awk -v cores=$nproc '{cpu[$1]+=$2} END {for (c in cpu) printf "%-20s %6.2f%%  %6.2f%% of total\n", c, cpu[c], cpu[c]/cores}' | \
-    sort -k2 -nr | head
+    awk -v cores=$nproc '
+      $2 ~ /^[0-9.]+$/ {
+        cpu[$1] += $2
+      }
+      END {
+        for (c in cpu) {
+          share = cpu[c] / cores
+          printf "%-20s %15.2f%%\n", c, share
+        }
+      }' | sort -k2 -nr | head
+  echo ""
+}
+
+print_cpu_usage_advanced() {
+  nproc=$(nproc)
+  printf "%-20s %16s %12s %10s\n" "Command" "% of total CPU" "Raw" "Procs"
+  echo""
+  ps -eo comm,pcpu --no-headers | \
+    awk -v cores=$nproc '
+      $2 ~ /^[0-9.]+$/ {
+        cpu[$1] += $2
+        count[$1]++
+      }
+      END {
+        for (c in cpu) {
+          share = cpu[c] / cores
+          printf "%-20s %15.2f%% %11.2f%% %9d\n", c, share, cpu[c], count[c]
+        }
+      }' | sort -k2 -nr | head
   echo ""
 }
 
@@ -19,7 +47,7 @@ print_process_stats() {
 
 print_load_uptime() {
   read load1 load5 load15 _ < /proc/loadavg
-  echo "Load average: $load1 $load5 $load15 -- cores: $(nproc)"
+  echo "Load average: $load1 $load5 $load15 - cores: $(nproc)"
   echo -n "Uptime: "
   uptime -p
   echo ""
@@ -62,6 +90,7 @@ print_disk_usage() {
 }
 
 main() {
+  # print_cpu_usage_advanced
   print_cpu_usage
   # print_process_stats
   print_load_uptime

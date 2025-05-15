@@ -2,7 +2,7 @@
 set -e
 
 APP_NAME="minitop"
-VERSION="1.0"
+VERSION="1.1"
 ARCH="all"
 PKG_DIR="${APP_NAME}_${VERSION}"
 
