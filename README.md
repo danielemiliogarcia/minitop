@@ -15,7 +15,7 @@ minitop is a simple system monitoring tool written in Bash. It displays:
 
 ## One liner install from release files
 ```bash
-curl -L -o /tmp/minitop.deb https://github.com/danielemiliogarcia/minitop/releases/download/v1.0/minitop_1.0.deb && sudo apt install -y /tmp/minitop.deb && rm /tmp/minitop.deb
+curl -L -o /tmp/minitop.deb https://github.com/danielemiliogarcia/minitop/releases/download/v1.1/minitop_1.1.deb && sudo apt install -y /tmp/minitop.deb && rm /tmp/minitop.deb
 ```
 
 ## Install from sources
